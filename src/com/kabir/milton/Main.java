@@ -1,6 +1,8 @@
 //package search;
 package com.kabir.milton;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
@@ -10,17 +12,36 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         HashMap<String, List<String>> myMap = new HashMap<>();
         var lst = new ArrayList<String>();
-        System.out.println("Enter the number of people:");
-        int cnt = Integer.parseInt(sc.nextLine());
-        System.out.println("Enter all people:");
-        for (int i = 0; i < cnt; i++) {
-            String st = sc.nextLine();
-            lst.add(st);
-            String[] ar = st.split(" ");
-            for (String s : ar) {
-                myMap.computeIfAbsent(s.toLowerCase(Locale.ROOT), k -> new ArrayList<>()).add(st);
+//        System.out.println("Enter the number of people:");
+//        int cnt = Integer.parseInt(sc.nextLine());
+//        System.out.println("Enter all people:");
+//        for (int i = 0; i < cnt; i++) {
+//            String st = sc.nextLine();
+//
+//        }
+
+
+        try {
+            File myObj = new File(args[1]);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                lst.add(data);
+                String[] ar = data.split(" ");
+                for (String s : ar) {
+                    myMap.computeIfAbsent(s.toLowerCase(Locale.ROOT), k -> new ArrayList<>()).add(data);
+                }
+//                System.out.println(data);
             }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
+
+
+
+
         while (true) {
             System.out.println();
             System.out.println("=== Menu ===\n" +
