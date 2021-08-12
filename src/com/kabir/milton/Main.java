@@ -40,8 +40,6 @@ public class Main {
         }
 
 
-
-
         while (true) {
             System.out.println();
             System.out.println("=== Menu ===\n" +
@@ -56,7 +54,7 @@ public class Main {
                 int ccc = 0;
                 Set<String> ss = new HashSet<>();
                 for (String ii : myMap.keySet()) {
-                    if (ii.matches("(.*)" + st + "(.*)")) {
+                    if (ii.matches(st)) {
                         ccc = 1;
                         ArrayList<String> ans = (ArrayList<String>) myMap.get(ii);
                         ss.addAll(ans);
