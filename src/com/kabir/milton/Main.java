@@ -49,29 +49,65 @@ public class Main {
             int ck = Integer.parseInt(sc.nextLine());
             if (ck == 1) {
                 System.out.println();
+                System.out.println("Select a matching strategy: ALL, ANY, NONE");
+                String ckk = sc.nextLine();
+                System.out.println();
                 System.out.println("Enter a name or email to search all suitable people.");
-                String st = sc.nextLine().toLowerCase(Locale.ROOT);
-                int ccc = 0;
-                Set<String> ss = new HashSet<>();
-                for (String ii : myMap.keySet()) {
-                    if (ii.matches(st)) {
-                        ccc = 1;
-                        ArrayList<String> ans = (ArrayList<String>) myMap.get(ii);
-                        ss.addAll(ans);
-                    }
-                }
-                if (ccc == 0) {
-                    System.out.println("No matching people found.");
-                } else {
-                    System.out.println("\nFound people:");
-                    for (String s : lst) {
+                String[] br = sc.nextLine().split(" ");
+                if (ckk.equals("ALL")) {
+                    Set<String> ss = new HashSet<>();
+                    for (String ii : myMap.keySet()) {
+                        int bv = 1;
+                        for (int i = 0; i < br.length; i++) {
+                            if (!ii.matches(br[i])) {
+                                bv = 0;
+                            }
+                        }
+                        if (bv == 1) {
+                            ArrayList<String> ans = (ArrayList<String>) myMap.get(ii);
+                            ss.addAll(ans);
+                        }
 
+                    }
+                    for (String s : lst) {
                         if (ss.contains(s)) {
                             System.out.println(s);
                         }
                     }
-                }
+                } else if (ckk.equals("ANY")) {
+                    Set<String> ss = new HashSet<>();
+                    for (int i = 0; i < br.length; i++) {
+                        String st = br[i];
+                        for (String ii : myMap.keySet()) {
+                            if (ii.matches(st)) {
+                                ArrayList<String> ans = (ArrayList<String>) myMap.get(ii);
+                                ss.addAll(ans);
+                            }
+                        }
+                    }
+                    for (String s : lst) {
+                        if (ss.contains(s)) {
+                            System.out.println(s);
+                        }
+                    }
+                } else if (ckk.equals("NONE")) {
+                    Set<String> ss = new HashSet<>();
+                    for (int i = 0; i < br.length; i++) {
+                        String st = br[i];
+                        for (String ii : myMap.keySet()) {
+                            if (ii.matches(st)) {
+                                ArrayList<String> ans = (ArrayList<String>) myMap.get(ii);
+                                ss.addAll(ans);
+                            }
+                        }
+                    }
+                    for (String s : lst) {
+                        if (!ss.contains(s)) {
+                            System.out.println(s);
+                        }
+                    }
 
+                }
             } else if (ck == 2) {
                 System.out.println();
                 System.out.println("=== List of people ===");
